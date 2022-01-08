@@ -1,7 +1,7 @@
 # virtualbox
-Automated installation of VirtualBox on Linux Mint 20+ from VirtualBox third-party repository.
+Installation automatisée de VirtualBox sur Linux Mint 20+ et Ubuntu 20.04+ à partir du référentiel tiers VirtualBox.
 
-Installation automatisée de VirtualBox sur Linux Mint 20+ à partir du référentiel tiers VirtualBox.
+Installation automatisée de VirtualBox sur Linux Mint 20+ et Ubuntu 20.04+ à partir du référentiel tiers VirtualBox.
 
 # Description
 VirtualBox software install script for Linux Mint 20+ (Cinnamon / Mate / xfce) in order to obtain VirtualBox software from third party VirtualBox repository ". This script may also be valid for Linux Ubuntu 20.04.
