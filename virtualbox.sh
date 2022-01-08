@@ -4,7 +4,7 @@
 #   Amaury Libert <amaury-libert@hotmail.com> de Blabla Linux <https://blablalinux.be>
 #
 # Description:
-#   Script d'installations logiciel VirtualBox pour Linux Mint 20+ (Cinnamon/Mate/xfce) afin d'obtenir le logiciel VirtualBox à partir du dépôt tiers VirtualBox". CE script peut-être valable aussi pour Linux Ubuntu 19.10 et 20.04.
+#   Installation automatisée de VirtualBox sur Linux Mint 20+ et Ubuntu 20.04+ à partir du référentiel tiers VirtualBox.
 #
 # Préambule Légal:
 # 	Ce script est un logiciel libre.
