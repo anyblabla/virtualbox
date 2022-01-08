@@ -1,5 +1,5 @@
 # virtualbox
-Installation automatisée de VirtualBox sur Linux Mint 20+ et Ubuntu 20.04+ à partir du référentiel tiers VirtualBox.
+Automated installation of VirtualBox on Linux Mint 20+ and Ubuntu 20.04+ from third party VirtualBox repository.
 
 Installation automatisée de VirtualBox sur Linux Mint 20+ et Ubuntu 20.04+ à partir du référentiel tiers VirtualBox.
 
