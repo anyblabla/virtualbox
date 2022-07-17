@@ -4,7 +4,7 @@
 #   Amaury Libert <amaury-libert@hotmail.com> de Blabla Linux <https://blablalinux.be>
 #
 # Description:
-#   Installation automatisée de VirtualBox sur Linux Mint 20+ et Ubuntu 20.04+ à partir du référentiel tiers VirtualBox.
+#   Installation automatisée de VirtualBox sur Linux Mint 21 et Ubuntu 22.04 à partir du référentiel tiers VirtualBox.
 #
 # Préambule Légal:
 # 	Ce script est un logiciel libre.
@@ -20,7 +20,7 @@ clear
 #
 echo " Ajout de la clé d'authentification et du dépôt supplémentaire virtualbox..." 
 wget -q -O- http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | apt-key add -
-echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian eoan contrib" | tee /etc/apt/sources.list.d/virtualbox.list
+echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian jammy contrib" | tee /etc/apt/sources.list.d/virtualbox.list
 #
 echo "Rafraîchissement dépôts..."
 apt update
