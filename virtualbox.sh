@@ -4,7 +4,7 @@
 #   Amaury Libert <amaury-libert@hotmail.com> de Blabla Linux <https://blablalinux.be>
 #
 # Description:
-#   Installation automatisée de VirtualBox sur Linux Mint 21 et Ubuntu 22.04 à partir du référentiel tiers VirtualBox.
+#   Installation automatisée de VirtualBox sur Linux Mint 21 et Ubuntu 22.04 à partir du dépôt tiers VirtualBox.
 #
 # Préambule Légal:
 # 	Ce script est un logiciel libre.
