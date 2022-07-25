@@ -18,13 +18,13 @@
 echo "Effacement écran..."
 clear
 #
-echo "Installer les paquets requis"
+echo "Installer les paquets requis..."
 apt install wget apt-transport-https gnupg2 ubuntu-keyring -y
 #
-echo "Importer la clé GPG" 
+echo "Importer la clé GPG..." 
 wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | gpg --dearmor | tee /usr/share/keyrings/virtualbox.gpg
 #
-echo "Importer le dépôt VirtualBox"
+echo "Importer le dépôt VirtualBox..."
 echo deb [arch=amd64 signed-by=/usr/share/keyrings/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian jammy contrib | tee /etc/apt/sources.list.d/virtualbox.list
 #
 echo "Rafraîchissement dépôts..."
