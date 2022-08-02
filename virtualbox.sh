@@ -4,7 +4,8 @@
 #   Amaury Libert <amaury-libert@hotmail.com> de Blabla Linux <https://blablalinux.be>
 #
 # Description:
-#   Installation automatisée de VirtualBox sur Linux Mint 21 et Ubuntu 22.04 à partir du dépôt tiers VirtualBox.
+#   VirtualBox software install script for Linux Mint 21 (Cinnamon / Mate / xfce) in order to obtain VirtualBox software from third party VirtualBox repository ". This script may also be valid for Linux Ubuntu 22.04.
+#   Script d'installations logiciel VirtualBox pour Linux Mint 21 (Cinnamon/Mate/xfce) afin d'obtenir le logiciel VirtualBox à partir du dépôt tiers VirtualBox". Ce script peut-être valable aussi pour Linux Ubuntu 22.04.
 #
 # Préambule Légal:
 # 	Ce script est un logiciel libre.
