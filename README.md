@@ -5,10 +5,10 @@ Script d'installations logiciel VirtualBox pour Linux Mint 21 (Cinnamon/Mate/xfc
 
 
 # Installation
-chmod +x virtualbox.sh
+- chmod +x virtualbox.sh
 
-sudo ./virtualbox.sh
+- sudo ./virtualbox.sh
 
 # Demonstration / Démonstration
 
-https://youtu.be/IiWoVe8r9FQ
+- https://youtu.be/IiWoVe8r9FQ
