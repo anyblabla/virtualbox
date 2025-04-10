@@ -9,6 +9,6 @@ chmod +x virtualbox.sh
 
 sudo ./virtualbox.sh
 
-# Demonstration/Démonstration
+# Demonstration / Démonstration
 
 https://youtu.be/IiWoVe8r9FQ
