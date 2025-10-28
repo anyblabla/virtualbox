@@ -1,10 +1,10 @@
 # 📦 `virtualbox.sh`
 
-## Script d'Installation de VirtualBox à partir du Dépôt Tiers Officiel
+## Script d'installation de VirtualBox à partir du dépôt tiers officiel
 
 -----
 
-### 🇫🇷 Description du Projet
+### 🇫🇷 **Description du projet**
 
 Ce script Bash automatise l'installation du logiciel de virtualisation **VirtualBox** en configurant correctement le dépôt tiers officiel d'Oracle.
 
@@ -16,7 +16,7 @@ Le script est conçu pour fonctionner sur :
   * **Linux Mint 21.x** (Cinnamon, Mate, xfce)
   * **Ubuntu 22.04.x** (et ses variantes)
 
-### 🇬🇧 Project Description
+### 🇬🇧 **Project Description**
 
 This Bash script automates the installation of the **VirtualBox** virtualization software by correctly configuring the official Oracle third-party repository.
 
@@ -30,7 +30,7 @@ The script is designed to work on:
 
 -----
 
-### 🛠️ Installation et Utilisation / Installation and Usage
+### 🛠️ **Installation et utilisation / Installation and Usage**
 
 Suivez ces étapes pour installer VirtualBox en toute simplicité :
 
@@ -50,7 +50,7 @@ Le script gérera automatiquement l'importation de la clé GPG, l'ajout du dép�
 
 -----
 
-### 📺 Démonstration
+### 📺 **Démonstration**
 
 Pour voir le script en action et comprendre comment il gère l'installation de VirtualBox sur Linux Mint 21 :
 
@@ -60,7 +60,6 @@ Pour voir le script en action et comprendre comment il gère l'installation de V
 
 -----
 
-### 📝 Licence
+### 📝 **Licence**
 
-Ce projet est sous licence **[À compléter - Ex: MIT, GPL, etc.]**.
-http://googleusercontent.com/youtube_content/7
+Ce projet est sous licence GNU GPL (v2.0).
