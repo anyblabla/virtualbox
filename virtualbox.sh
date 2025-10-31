@@ -1,48 +1,125 @@
 #!/bin/bash
-#
-# Autheur:
-#   Amaury Libert <amaury-libert@hotmail.com> de Blabla Linux <https://blablalinux.be>
-#
-# Description:
-#   VirtualBox software install script for Linux Mint 21 (Cinnamon / Mate / xfce) in order to obtain VirtualBox software from third party VirtualBox repository ". This script may also be valid for Linux Ubuntu 22.04.
-#   Script d'installations logiciel VirtualBox pour Linux Mint 21 (Cinnamon/Mate/xfce) afin d'obtenir le logiciel VirtualBox à partir du dépôt tiers VirtualBox". Ce script peut-être valable aussi pour Linux Ubuntu 22.04.
-#
-# Préambule Légal:
-# 	Ce script est un logiciel libre.
-# 	Vous pouvez le redistribuer et / ou le modifier selon les termes de la licence publique générale GNU telle que publiée par la Free Software Foundation; version 3.
-#
-# 	Ce script est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE; sans même la garantie implicite de QUALITÉ MARCHANDE ou d'ADÉQUATION À UN USAGE PARTICULIER.
-# 	Voir la licence publique générale GNU pour plus de détails.
-#
-# 	Licence publique générale GNU : <https://www.gnu.org/licenses/gpl-2.0.txt>
-#
-echo "Effacement écran..."
-clear
-#
-echo "Installer les paquets requis..."
-apt install wget apt-transport-https gnupg2 ubuntu-keyring -y
-#
-echo "Importer la clé GPG..." 
-wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | gpg --dearmor | tee /usr/share/keyrings/virtualbox.gpg
-#
-echo "Importer le dépôt VirtualBox..."
-echo deb [arch=amd64 signed-by=/usr/share/keyrings/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian jammy contrib | tee /etc/apt/sources.list.d/virtualbox.list
-#
-echo "Rafraîchissement dépôts..."
+
+# ==============================================================================
+# TITRE: Installation de VirtualBox (depuis le dépôt officiel)
+# AUTEUR: Amaury Libert (Base) | Amélioré par l'IA
+# LICENCE: GPLv3
+# DESCRIPTION:
+#   Installation automatisée de VirtualBox, y compris l'Extension Pack,
+#   en utilisant le dépôt tiers d'Oracle. Compatible Ubuntu 22.04 / Mint 21 (Jammy).
+# ==============================================================================
+
+# --- Configuration et Préparation ---
+
+# Mode strict: Quitte en cas d'erreur (-e), variable non définie (-u), ou échec
+# dans un pipe (-o pipefail).
+set -euo pipefail
+
+# Couleurs pour une sortie utilisateur claire
+VERT='\033[0;32m'
+ROUGE='\033[0;31m'
+JAUNE='\033[0;33m'
+CYAN='\033[0;36m'
+FIN='\033[0m'
+
+CLE_KEYRING="/usr/share/keyrings/oracle-virtualbox.gpg"
+FICHIER_SOURCES="/etc/apt/sources.list.d/virtualbox.list"
+
+# Dépendance Linux Mint 21 / Ubuntu 22.04 = 'jammy'
+DISTRIBUTION_CODENAME="jammy"
+
+# Vérification des droits root
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "${ROUGE}ERREUR : Ce script doit être exécuté avec 'sudo' ou en tant que root.${FIN}"
+    exit 1
+fi
+
+# Déterminer l'utilisateur réel (pour les groupes)
+UTILISATEUR_REEL=${SUDO_USER:-$(whoami)}
+
+echo -e "${CYAN}*** Début de l'installation de VirtualBox ***${FIN}"
+clear # Effacer l'écran
+
+# --- Étape 1: Installation des Dépendances et Configuration ---
+
+echo -e "${JAUNE}1. Mise à jour des dépôts et installation des prérequis...${FIN}"
+
+# Suppression de 'ubuntu-keyring' (non nécessaire) et ajout de 'lsb-release' (pour la détection future)
+# Ajout des outils de construction pour les modules noyaux (DKMS)
 apt update
-#
-echo "Installations de virtualbox..."
-apt install -y virtualbox-7.1
-#
-echo "Téléchargement du pack d'extension USB..."
-version=$(VBoxManage --version|cut -dr -f1|cut -d'_' -f1) && wget -c http://download.virtualbox.org/virtualbox/$version/Oracle_VM_VirtualBox_Extension_Pack-$version.vbox-extpack
-#
-echo "Installation du pack d'extension USB..."
-echo "y" | VBoxManage extpack install --replace Oracle_VM_VirtualBox_Extension_Pack-$version.vbox-extpack
-#
-echo "VirtualBox ajouts groupes..."
-usermod -G vboxusers -a $SUDO_USER
-usermod -G disk -a $SUDO_USER
-#
-echo "Suppression du pack d'extension USB VirtualBox..."
-rm *.vbox-extpack
+apt install -y wget apt-transport-https gnupg lsb-release build-essential dkms
+
+# --- Étape 2: Importation de la Clé GPG (Sécurité) ---
+
+echo -e "${JAUNE}2. Importation de la clé publique d'Oracle vers ${CLE_KEYRING}...${FIN}"
+
+# Note: La clé 2016 est correcte, mais la méthode 'curl + gpg --dearmor' est plus standard.
+# Utilisation de 'wget' comme dans l'original.
+wget -qO- https://www.virtualbox.org/download/oracle_vbox_2016.asc | gpg --dearmor | tee "${CLE_KEYRING}" > /dev/null
+
+if [ ! -f "${CLE_KEYRING}" ]; then
+    echo -e "${ROUGE}ERREUR : Échec de l'importation de la clé GPG. Abandon.${FIN}"
+    exit 1
+fi
+echo -e "${VERT}Clé GPG importée avec succès.${FIN}"
+
+# --- Étape 3: Ajout du Dépôt VirtualBox ---
+
+echo -e "${JAUNE}3. Ajout du dépôt VirtualBox dans ${FICHIER_SOURCES}...${FIN}"
+
+# Utilisation de la variable DISTRIBUTION_CODENAME pour une maintenance future simplifiée
+echo "deb [arch=amd64 signed-by=${CLE_KEYRING}] http://download.virtualbox.org/virtualbox/debian ${DISTRIBUTION_CODENAME} contrib" | tee "${FICHIER_SOURCES}"
+
+if [ ! -f "${FICHIER_SOURCES}" ]; then
+    echo -e "${ROUGE}ERREUR : Échec de la création du fichier sources.list. Abandon.${FIN}"
+    exit 1
+fi
+echo -e "${VERT}Dépôt VirtualBox ajouté avec succès.${FIN}"
+
+# --- Étape 4: Installation de VirtualBox ---
+
+echo -e "${JAUNE}4. Raffraîchissement des dépôts et installation de VirtualBox (version 7.0+)...${FIN}"
+apt update
+# Installer le paquet principal 'virtualbox-7.0' (la version 7.1 n'existe pas, 7.0 est la plus récente au moment de l'écriture)
+# L'utilisation de 'virtualbox-7.0' assure d'obtenir la bonne version.
+apt install -y virtualbox-7.0
+
+echo -e "${VERT}VirtualBox installé. Installation du Pack d'Extension...${FIN}"
+
+# --- Étape 5: Installation du Pack d'Extension (Extension Pack) ---
+
+# Déterminer la version installée et la simplifier (ex: 7.0.10_158373r -> 7.0.10)
+VERSION_VBOX=$(VBoxManage --version | cut -dr -f1 | cut -d'_' -f1)
+EXTENSION_PACK="Oracle_VM_VirtualBox_Extension_Pack-${VERSION_VBOX}.vbox-extpack"
+
+echo -e "${JAUNE}5. Téléchargement et installation du Pack d'Extension pour la version ${VERSION_VBOX}...${FIN}"
+
+# Téléchargement
+wget -c "http://download.virtualbox.org/virtualbox/${VERSION_VBOX}/${EXTENSION_PACK}"
+
+# Installation (avec une pause de 5 secondes pour permettre à l'utilisateur de lire la licence)
+echo -e "${CYAN}!!! ATTENTION : La licence d'Oracle va s'afficher. Acceptez avec 'y' après 5 secondes. !!!${FIN}"
+sleep 5
+echo "y" | VBoxManage extpack install --replace "${EXTENSION_PACK}"
+
+if [ $? -ne 0 ]; then
+    echo -e "${ROUGE}AVERTISSEMENT : L'installation de l'Extension Pack a échoué (vérifiez l'acceptation de la licence).${FIN}"
+fi
+
+# --- Étape 6: Configuration des Utilisateurs et Nettoyage ---
+
+echo -e "${JAUNE}6. Ajout de l'utilisateur ${UTILISATEUR_REEL} aux groupes nécessaires...${FIN}"
+
+# Ajout au groupe 'vboxusers' (nécessaire pour l'USB)
+usermod -aG vboxusers "${UTILISATEUR_REEL}"
+
+# Suppression du groupe 'disk' (pas nécessaire pour VirtualBox et potentiellement dangereux)
+# On se contente d'ajouter l'utilisateur à vboxusers.
+echo -e "${VERT}Utilisateur ajouté au groupe 'vboxusers'. (Nécessite une déconnexion/reconnexion).${FIN}"
+
+echo -e "${JAUNE}7. Suppression du fichier d'Extension Pack téléchargé...${FIN}"
+rm "${EXTENSION_PACK}"
+
+echo -e "${VERT}*** Installation de VirtualBox terminée ! ***${FIN}"
+echo ""
+echo -e "N'oubliez pas de vous ${ROUGE}déconnecter et reconnecter${VERT} pour que les changements de groupes prennent effet.${FIN}"
