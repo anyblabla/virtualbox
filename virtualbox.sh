@@ -3,7 +3,7 @@
 # ==============================================================================
 # TITRE: Installation de VirtualBox (depuis le dépôt officiel)
 # AUTEUR: Amaury Libert (Base) | Amélioré par l'IA
-# LICENCE: GPLv3
+# LICENCE: GPLv2
 # DESCRIPTION:
 #   Installation automatisée de VirtualBox, y compris l'Extension Pack,
 #   en utilisant le dépôt tiers d'Oracle. Compatible Ubuntu 22.04 / Mint 21 (Jammy).
