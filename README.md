@@ -5,15 +5,16 @@
 ![License](https://img.shields.io/badge/License-GPLv2-blue?style=for-the-badge)
 ![Version](https://img.shields.io/badge/VBox-7.2+-64a5c3?style=for-the-badge&logo=virtualbox&logoColor=white)
 
-## Script d'installation de VirtualBox à partir du dépôt tiers officiel (Universel)
+## Script d'installation **et de désinstallation** de VirtualBox à partir du dépôt tiers officiel (Universel)
 
 ---
 
 ### 🇫🇷 **Description du projet**
 
-Ce script Bash automatise l'installation de **VirtualBox 7.2+** en configurant dynamiquement le dépôt tiers officiel d'Oracle.
+Ce script Bash automatise **l’installation et la désinstallation complète** de **VirtualBox 7.2+**, en configurant dynamiquement le dépôt tiers officiel d’Oracle.
 
-Le script détecte automatiquement votre distribution et sa base (Debian, Ubuntu ou Mint) pour installer la version la plus récente disponible, incluant le **Pack d'Extension (Extension Pack)**. L'utilisation du dépôt officiel garantit l'accès aux dernières fonctionnalités et correctifs de sécurité dès leur sortie.
+Le script détecte automatiquement votre distribution et sa base (Debian, Ubuntu ou Mint) pour installer la version la plus récente disponible, incluant le **Pack d’Extension (Extension Pack)**.  
+Il peut également **désinstaller proprement** VirtualBox, son Extension Pack, le dépôt Oracle, la clé GPG et les groupes associés.
 
 **Sources du projet :**  
 Ce projet est disponible sur deux plateformes :
@@ -33,9 +34,10 @@ Ce projet est disponible sur deux plateformes :
 
 ### 🇬🇧 **Project Description**
 
-This Bash script automates the installation of **VirtualBox 7.2+** by dynamically configuring the official Oracle third‑party repository.
+This Bash script automates the **installation and full removal** of **VirtualBox 7.2+**, dynamically configuring the official Oracle third‑party repository.
 
-The script automatically detects your distribution and its base (Debian, Ubuntu, or Mint) to install the latest available version, including the **Extension Pack**. Using the official repository ensures access to the latest features and security patches as soon as they are released.
+The script automatically detects your distribution and its base (Debian, Ubuntu, or Mint) to install the latest available version, including the **Extension Pack**.  
+It can also **cleanly uninstall** VirtualBox, the Extension Pack, the Oracle repository, the GPG key, and related groups.
 
 **Project sources:**
 
@@ -52,28 +54,43 @@ The script automatically detects your distribution and its base (Debian, Ubuntu,
 
 ---
 
-### 🛠️ **Installation et utilisation / Installation and Usage**
+### 🛠️ **Installation / Désinstallation**
 
-1. **Rendre le script exécutable :**
+Le script propose un **menu interactif** :
 
-   ```bash
-   chmod +x virtualbox.sh
-   ```
+```
+1) Installer VirtualBox
+2) Désinstaller VirtualBox
+3) Quitter
+```
 
-2. **Lancer l'installation avec les droits `sudo` :**
+#### ▶ Installation
 
-   ```bash
-   sudo ./virtualbox.sh
-   ```
+1. Rendre le script exécutable :
+
+```bash
+chmod +x virtualbox.sh
+```
+
+2. Lancer le script :
+
+```bash
+sudo ./virtualbox.sh
+```
+
+#### ▶ Désinstallation
+
+Lancez simplement le script et choisissez l’option **2**.
 
 **Actions automatisées :**
 
-* Importation sécurisée de la clé GPG d'Oracle.
-* Détection automatique du nom de code de la distribution.
-* Installation de `dkms` et des dépendances de construction.
-* Installation de la version la plus récente (ex : 7.2).
-* Téléchargement et installation automatique de l’Extension Pack.
-* Ajout de l'utilisateur aux groupes `vboxusers` et `disk`.
+* Importation sécurisée de la clé GPG d’Oracle  
+* Ajout du dépôt officiel VirtualBox  
+* Détection automatique de la version la plus récente  
+* Installation de `dkms` et des dépendances  
+* Téléchargement et installation de l’Extension Pack  
+* Ajout de l’utilisateur aux groupes `vboxusers` et `disk`  
+* **Désinstallation complète** (VirtualBox, Extension Pack, dépôt, clé GPG, groupes)
 
 ---
 
