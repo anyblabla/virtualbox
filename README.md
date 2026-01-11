@@ -1,62 +1,64 @@
 # 📦 `virtualbox.sh`
 
-## Script d'installation de VirtualBox à partir du dépôt tiers officiel
+## Script d'installation de VirtualBox à partir du dépôt tiers officiel (Universel)
 
 -----
 
 ### 🇫🇷 **Description du projet**
 
-Ce script Bash automatise l'installation du logiciel de virtualisation **VirtualBox** en configurant correctement le dépôt tiers officiel d'Oracle.
+Ce script Bash automatise l'installation de **VirtualBox 7.2+** en configurant dynamiquement le dépôt tiers officiel d'Oracle. 
 
-En utilisant le dépôt officiel plutôt que celui de la distribution, vous vous assurez d'installer la **dernière version stable** de VirtualBox, y compris le Pack d'Extension (Extension Pack), et de recevoir les mises à jour en temps voulu.
+Le script détecte automatiquement votre distribution et sa base (Debian, Ubuntu ou Mint) pour installer la version la plus récente disponible, incluant le **Pack d'Extension (Extension Pack)**. L'utilisation du dépôt officiel garantit l'accès aux dernières fonctionnalités et correctifs de sécurité dès leur sortie.
 
 **Compatibilité :**
-Le script est conçu pour fonctionner sur :
-
-  * **Linux Mint 21.x** (Cinnamon, Mate, xfce)
-  * **Ubuntu 22.04.x** (et ses variantes)
+Le script est optimisé pour :
+* **Debian 12 (Bookworm) & 13 (Trixie)**
+* **Ubuntu 22.04 (Jammy) & 24.04 (Noble)**
+* **Linux Mint 21.x & 22.x**
 
 ### 🇬🇧 **Project Description**
 
-This Bash script automates the installation of the **VirtualBox** virtualization software by correctly configuring the official Oracle third-party repository.
+This Bash script automates the installation of **VirtualBox 7.2+** by dynamically configuring the official Oracle third-party repository.
 
-By using the official repository instead of the distribution's repository, you ensure that you install the **latest stable version** of VirtualBox, including the Extension Pack, and receive timely updates.
+The script automatically detects your distribution and its base (Debian, Ubuntu, or Mint) to install the latest available version, including the **Extension Pack**. Using the official repository ensures access to the latest features and security patches as soon as they are released.
 
 **Compatibility:**
-The script is designed to work on:
-
-  * **Linux Mint 21.x** (Cinnamon, Mate, xfce)
-  * **Ubuntu 22.04.x** (and its variants)
+The script is optimized for:
+* **Debian 12 (Bookworm) & 13 (Trixie)**
+* **Ubuntu 22.04 (Jammy) & 24.04 (Noble)**
+* **Linux Mint 21.x & 22.x**
 
 -----
 
 ### 🛠️ **Installation et utilisation / Installation and Usage**
 
-Suivez ces étapes pour installer VirtualBox en toute simplicité :
-
 1.  **Rendre le script exécutable :**
-
     ```bash
     chmod +x virtualbox.sh
     ```
 
 2.  **Lancer l'installation avec les droits `sudo` :**
-
     ```bash
     sudo ./virtualbox.sh
     ```
 
-Le script gérera automatiquement l'importation de la clé GPG, l'ajout du dépôt, l'installation de la dernière version de VirtualBox et l'installation du **Pack d'Extension (Extension Pack)**, qui est essentiel pour des fonctionnalités comme le support USB 2.0/3.0.
+**Actions automatisées :**
+* Importation sécurisée de la clé GPG d'Oracle.
+* Détection automatique du "Codename" de la distribution.
+* Installation de `dkms` et des dépendances de construction.
+* Installation de la version la plus récente (ex: 7.2).
+* Téléchargement et installation automatique de l'Extension Pack.
+* Ajout de l'utilisateur aux groupes `vboxusers` et `disk`.
 
 -----
 
 ### 📺 **Démonstration**
 
-Pour voir le script en action et comprendre comment il gère l'installation de VirtualBox sur Linux Mint 21 :
-
 | Vidéo | Chaîne | Lien |
 | :--- | :--- | :--- |
 | **Mon script Virtualbox pour Mint 21** | Blabla Linux | [Regarder la Démonstration](http://www.youtube.com/watch?v=IiWoVe8r9FQ) |
+
+> *Note : Bien que la vidéo présente Mint 21, le script a été mis à jour pour supporter Debian 13 et les versions supérieures de VirtualBox.*
 
 -----
 
